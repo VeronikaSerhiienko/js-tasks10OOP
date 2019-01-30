@@ -1,18 +1,11 @@
-console.log(sessionStorage);
+console.log(1,sessionStorage);
 
 var logedUser = {
 
 };
 
-if (sessionStorage === null) {
-    showForms(); 
-  } else {
-    logedUser.name = sessionStorage.getItem('name');
-    logedUser.role = sessionStorage.getItem('role');
-}
-
-console.log(sessionStorage);
-console.log(logedUser);
+console.log(2,sessionStorage);
+console.log(3,logedUser);
 
 var user = {
  viewNews: function() {
@@ -43,6 +36,15 @@ var user = {
     document.querySelector('.js-edit-profile').classList.add('visible');
   },
 };
+
+if (sessionStorage.length === 0) {
+    showForms(); 
+  } else {
+    logedUser.name = sessionStorage.getItem('name');
+    logedUser.role = sessionStorage.getItem('role');
+    hideForm();
+    showOpportunities();
+}
 
 var registredUsers = [
 
@@ -118,7 +120,7 @@ function AdminFactory(name, password) {
      console.dir(registredUsers);
   }
 
-  function hideForm () {
+  function hideForm() {
     document.querySelectorAll('.js-form').forEach(function(item) {
       item.classList.remove('visible');
     });
@@ -150,6 +152,7 @@ function AdminFactory(name, password) {
 
   function clearLogedUser () {
     logedUser = {};
+    sessionStorage.clear();
   }
 
 
@@ -161,6 +164,8 @@ function AdminFactory(name, password) {
       if (item.name === userName && item.password === userPassword) { 
         sessionStorage.setItem('name', item.name);
         sessionStorage.setItem('role', item.role);
+        logedUser.name = sessionStorage.getItem('name');
+        logedUser.role = sessionStorage.getItem('role');
         hideForm();
         showOpportunities();
       }
