@@ -61,12 +61,14 @@ document.querySelector('.js-logInForm').addEventListener('formIsValid', function
 
 document.querySelector('.js-log-out').addEventListener('click', showStartPage);
 
-function getId() {
+function createId() {
   var id = registredUsers.length;
   return function(){ 
     return ++id;
   };
 }
+
+var getId = createId();
 
 function GuestFactory(name, password) {
   this.name = name;
@@ -132,6 +134,8 @@ function singUpUser(currentForm) {
     registredUsers.push(logedUser);    
     hideForm();
     showOpportunities();
+
+      console.dir(logedUser);
   } else {
     showStartPage();
     setTimeout(function() {
@@ -163,7 +167,7 @@ function hideForm() {
 
 function showOpportunities() {
   document.querySelector ('.js-user-name').innerHTML = logedUser.name;
-  
+
   if (logedUser.role === 'guest') {
     user.logOut();
     user.viewNews();
