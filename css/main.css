@@ -1,0 +1,15 @@
+
+
+
+.button-item,
+.formBlock {
+  display: none;
+}
+
+.non-visible {
+  display: none;
+}
+
+.visible {
+  display: block;
+}

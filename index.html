@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prototype</title>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+
+   <form class="js-logInForm js-form visible formBlock">
+    <fieldset>
+    <legend>Log in</legend>
+    <div>
+      <label for="form-name" >Name</label>
+      <input type="text" id="form-name" name="Name" class="js-name-field js-input" required placeholder="Andrew">
+      </div>
+      <div>
+        <label for="form-password">Password</label>
+        <input type="password"  name="Password" class="js-password-field js-input" required id="form-password">
+      </div>
+    </fieldset>
+    <input type="submit" value="Submit"></button>
+  </form>
+
+  <form class="js-singUpForm js-form visible formBlock">
+    <fieldset>
+    <legend>Sing Up</legend>
+    <div>
+      <label for="form-name" >Name</label>
+      <input type="text" id="form-name" name="Name" class="js-name-field js-input" required placeholder="Andrew">
+      </div>
+      <div>
+        <label for="form-password">Password</label>
+        <input type="password"  name="Password" class="js-password-field js-input" required id="form-password" data-confirm-field="">
+      </div>
+       <div>
+        <label for="form-confirn-password">Confirm password</label>
+        <input type="password"  name="Password" class="js-input" id="form-confirn-password" data-confirm-field-id="form-password" required>
+      </div>
+      <div >
+        <input type="checkbox" name="Bill" value="Admin" class="js-checkbox" checked>Admin
+      </div>
+    </fieldset>
+    <input type="submit" value="Submit"></button>
+  </form>
+  <div class="js-user-name"></div>
+  <button type="button" class="js-log-out button-item">Log out</button>
+  <button type="button" class="js-view-news button-item">View news</button>
+  <button type="button" class="js-edit-news button-item">Edit news</button>
+  <button type="button" class="js-delete-news button-item">Delete news</button>
+  <button type="button" class="js-edit-profile button-item">Edit profile</button>
+  <button type="button" class="js-edit-password button-item">Edit profile</button>
+
+  <script src="js/CarFactory.js" defer></script>
+  <script src="js/consoleLog.js" defer></script>
+  <script src="js/account.js" defer></script>
+</body>
+</html>
