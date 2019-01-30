@@ -38,6 +38,8 @@ password: '789',
 role: 'admin' // or another role
 }];
 
+var forms = document.querySelectorAll('.js-form');
+
 if (sessionStorage.length === 0) {
     showStartPage(); 
   } else {
@@ -58,7 +60,6 @@ document.querySelector('.js-logInForm').addEventListener('submit', function(even
 });
 
 document.querySelector('.js-log-out').addEventListener('click', showStartPage);
-var forms = document.querySelectorAll('js-form');
 
 function getId() {
   var id = registredUsers.length;
@@ -166,3 +167,49 @@ function clearInputedValue() {
     item.value = '';
   });
 }
+
+(function() {
+  function checkRequired(input) {
+    if (input.value === '' || input.value === ' ') {
+      resetError(input.parentElement);
+      showError(input.parentElement, 'This field is required. Please, fill in this field');
+      return false;
+    } else {
+      resetError(input.parentElement);
+      return true;
+    }
+  }
+
+  function checkPassword(passwordIn) {
+    var passwordRe = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (passwordIn.value.length) {
+      if (!passwordIn.value.match(passwordRe)) {
+        resetError(passwordIn.parentElement);
+        showError(passwordIn.parentElement, 'Please, enter valid password. At least one digit and one lowercase character and one uppercase character and special character');
+        return false;
+      } else {
+        resetError(passwordIn.parentElement);
+        return true;
+      }
+    } 
+    return true;
+  }
+
+  function checkConfirmFields(firstFieldIn, currentForm) {
+    var getidOfSecondField = '#'+ firstFieldIn.getAttribute('data-confirm-field-id');
+    var secondField = currentForm.querySelector(getidOfSecondField);
+    if (firstFieldIn.value.length) {
+      if (firstFieldIn.value !== secondField.value) {
+        resetError(firstFieldIn.parentElement);
+        showError(firstFieldIn.parentElement, 'Your fields do not match. Please, enter valid data.');
+        return false;
+      } else {
+        resetError(firstFieldIn.parentElement);
+        return true;
+      }
+    } 
+    return true;
+  }
+
+
+})();
