@@ -1,8 +1,12 @@
-
-
+.error-message {
+  color: tomato;
+}
+.error .form-block__field {
+  border: 1px solid tomato;
+}
 
 .button-item,
-.formBlock {
+.form-block {
   display: none;
 }
 
