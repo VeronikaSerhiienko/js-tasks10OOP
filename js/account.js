@@ -134,8 +134,6 @@ function singUpUser(currentForm) {
     registredUsers.push(logedUser);    
     hideForm();
     showOpportunities();
-
-      console.dir(logedUser);
   } else {
     showStartPage();
     setTimeout(function() {
@@ -146,17 +144,31 @@ function singUpUser(currentForm) {
 
 function checkUser(currentForm) {
   var userName = currentForm.querySelector('.js-name-field').value;
-  var userPassword = currentForm.querySelector('.js-password-field').value;  
+  var userPassword = currentForm.querySelector('.js-password-field').value; 
+  var isUserExist = false; 
+  var thisUser;
   registredUsers.forEach(function(item) {
-    if (item.name === userName && item.password === userPassword) { 
-      sessionStorage.setItem('name', item.name);
-      sessionStorage.setItem('role', item.role);
-      logedUser.name = sessionStorage.getItem('name');
-      logedUser.role = sessionStorage.getItem('role');
-      hideForm();
-      showOpportunities();
+    if (item.name === userName && item.password === userPassword) {
+    isUserExist = true;
+    thisUser = item;
     }
   });
+
+  if (isUserExist) {
+    sessionStorage.setItem('name', thisUser.name);
+    sessionStorage.setItem('role', thisUser.role);
+    logedUser.name = sessionStorage.getItem('name');
+    logedUser.role = sessionStorage.getItem('role');
+    hideForm();
+    showOpportunities();
+  } else {
+    resetError(currentForm);
+    showError(currentForm, 'This user does not exist');
+    showStartPage();
+    setTimeout(function() {
+      resetError(currentForm);
+    }, 2000);
+  }
  }
 
 function hideForm() {
