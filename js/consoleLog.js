@@ -1,8 +1,8 @@
 var transport = {
-stop: null
+  stop: null
 };
 var car = {
-stop: true
+  stop: true
 };
 car.__proto__ = transport;
 

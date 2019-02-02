@@ -2,8 +2,10 @@ var logedUser = {
 
 };
 
-var user = {
- viewNews: function() {
+function User() {}
+
+var User = {
+  viewNews: function() {
     document.querySelector('.js-view-news').classList.add('visible');
   },
   editNews: function() {
@@ -21,27 +23,28 @@ var user = {
 };
 
 var registredUsers = [
-{
-id: '1', //generated automatically at the time of creation
-name: 'Stepan',
-password: 'As@123123',
-role: 'admin' // or another role
-}, {
-id: '2', //generated automatically at the time of creation
-name: 'Andrew',
-password: 'As@456456',
-role: 'guest' // or another role
-},{
-id: '3', //generated automatically at the time of creation
-name: 'Line',
-password: 'As@789789',
-role: 'admin' // or another role
-}];
+  {
+    id: '1', //generated automatically at the time of creation
+    name: 'Stepan',
+    password: 'As@123123',
+    role: 'admin' // or another role
+  }, {
+    id: '2', //generated automatically at the time of creation
+    name: 'Andrew',
+    password: 'As@456456',
+    role: 'guest' // or another role
+  },{
+    id: '3', //generated automatically at the time of creation
+    name: 'Line',
+    password: 'As@789789',
+    role: 'admin' // or another role
+  }
+];
 
 var forms = document.querySelectorAll('.js-form');
 
 if (sessionStorage.length === 0) {
-    showStartPage(); 
+  showStartPage(); 
 } else {
   logedUser.name = sessionStorage.getItem('name');
   logedUser.role = sessionStorage.getItem('role');
@@ -75,47 +78,49 @@ function GuestFactory(name, password) {
   this.password = password;
   this.role = 'guest';
   this.id = getId();
-  this.__proto__ = user;
 }
+
+GuestFactory.prototype = User;
 
 function AdminFactory(name, password) {
   this.name = name;
   this.password = password;
   this.role = 'admin';
   this.id = getId();
-  this.__proto__ = user;
 }
+
+AdminFactory.prototype = User;
 
 function isSuchUserAlreadyExist(form) {
   var isNotExist = true;
-  registredUsers.forEach(function(item) {
+  registredUsers.forEach(function(registeredUser) {
 
-    if (item.name === logedUser.name && item.password === logedUser.password && item.role === logedUser.role) {
+    if (registeredUser.name === logedUser.name && registeredUser.password === logedUser.password && registeredUser.role === logedUser.role) {
       resetError(form);
       showError(form, 'This user already exist');
       isNotExist = false;
-      }     
-    });
+    }     
+  });
 
   return isNotExist;
 }
 
 function showError(container, errorMessage) {
-    container.classList.add('error');
-    var msgElem = document.createElement('p');
-    msgElem.classList.add('error-message');
-    msgElem.innerHTML = errorMessage;
-    container.appendChild(msgElem);
-  }
+  container.classList.add('error');
+  var msgElem = document.createElement('p');
+  msgElem.classList.add('error-message');
+  msgElem.innerHTML = errorMessage;
+  container.appendChild(msgElem);
+}
 
-  function resetError(container) {
-    container.classList.remove('error');
+function resetError(container) {
+  container.classList.remove('error');
 
-    if (container.lastChild.className === 'error-message') {
-      container.lastChild.classList.remove('error-message');
-      container.removeChild(container.lastChild);
-    }
+  if (container.lastChild.className === 'error-message') {
+    container.lastChild.classList.remove('error-message');
+    container.removeChild(container.lastChild);
   }
+}
 
 function singUpUser(currentForm) {
   var userName = currentForm.querySelector('.js-name-field').value;
@@ -147,10 +152,10 @@ function checkUser(currentForm) {
   var userPassword = currentForm.querySelector('.js-password-field').value; 
   var isUserExist = false; 
   var thisUser;
-  registredUsers.forEach(function(item) {
-    if (item.name === userName && item.password === userPassword) {
-    isUserExist = true;
-    thisUser = item;
+  registredUsers.forEach(function(registeredUser) {
+    if (registeredUser.name === userName && registeredUser.password === userPassword) {
+      isUserExist = true;
+      thisUser = registeredUser;
     }
   });
 
@@ -169,27 +174,27 @@ function checkUser(currentForm) {
       resetError(currentForm);
     }, 2000);
   }
- }
+}
 
 function hideForm() {
-  forms.forEach(function(item) {
-    item.classList.remove('visible');
+  forms.forEach(function(form) {
+    form.classList.remove('visible');
   });
 }
 
 function showOpportunities() {
-  document.querySelector ('.js-user-name').innerHTML = logedUser.name;
+  document.querySelector('.js-user-name').innerHTML = logedUser.name;
 
   if (logedUser.role === 'guest') {
-    user.logOut();
-    user.viewNews();
-    user.editProfile();
+    User.logOut();
+    User.viewNews();
+    User.editProfile();
   } else {
-    user.logOut();
-    user.viewNews();
-    user.editProfile();
-    user.editNews();
-    user.deleteNews();
+    User.logOut();
+    User.viewNews();
+    User.editProfile();
+    User.editNews();
+    User.deleteNews();
   }
 }
 
@@ -199,25 +204,25 @@ function hideOpportunities() {
   document.querySelector('.js-edit-news').classList.remove('visible');
   document.querySelector('.js-delete-news').classList.remove('visible');
   document.querySelector('.js-edit-profile').classList.remove('visible');
-  document.querySelector ('.js-user-name').innerHTML = '';
+  document.querySelector('.js-user-name').innerHTML = '';
 }
 
-function clearLogedUser () {
+function clearLogedUser() {
   logedUser = {};
   sessionStorage.clear();
 }
 
 function showStartPage() {
   hideOpportunities();
-  forms.forEach(function(item) {
-    item.classList.add('visible');
+  forms.forEach(function(form) {
+    form.classList.add('visible');
   });
   clearLogedUser();
   clearInputedValue();
 }
 
 function clearInputedValue() {
-  document.querySelectorAll('.js-input').forEach(function(item) {
-    item.value = '';
+  document.querySelectorAll('.js-input').forEach(function(input) {
+    input.value = '';
   });
 }

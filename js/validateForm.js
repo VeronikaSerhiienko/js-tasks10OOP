@@ -1,9 +1,9 @@
 ;(function() {
   var forms = document.querySelectorAll('.js-form');
-  forms.forEach(function(item) {
-    item.addEventListener('submit', function(event) {
+  forms.forEach(function(form) {
+    form.addEventListener('submit', function(event) {
       event.preventDefault();
-      validateForm(item);
+      validateForm(form);
     });
   });
 
@@ -81,8 +81,8 @@
   }
 
   function checkConfirmFields(firstFieldIn, currentForm) {
-    var getidOfSecondField = '#'+ firstFieldIn.getAttribute('data-confirm-field-id');
-    var secondField = currentForm.querySelector(getidOfSecondField);
+    var getIdOfSecondField = '#'+ firstFieldIn.getAttribute('data-confirm-field-id');
+    var secondField = currentForm.querySelector(getIdOfSecondField);
     if (firstFieldIn.value.length) {
       if (firstFieldIn.value !== secondField.value) {
         resetError(firstFieldIn.parentElement);
@@ -99,34 +99,34 @@
   function validateForm(currentForm) {
     var isFormValid = true;
     var inputs = currentForm.querySelectorAll('.js-input');
-    inputs.forEach(function(item) {
-      var rules = item.getAttribute('data-validation-rules');
+    inputs.forEach(function(input) {
+      var rules = input.getAttribute('data-validation-rules');
       if (rules.indexOf('required') !== -1) {
-        if (!checkRequired(item)) {
+        if (!checkRequired(input)) {
           isFormValid = false;
         }
       }
 
       if (rules.indexOf('minlength') !== -1) {
-        if (!checkMinLength(item)) {
+        if (!checkMinLength(input)) {
           isFormValid = false;
         }
       }
 
       if (rules.indexOf('letter') !== -1) {
-        if (!checkWord(item)) {
+        if (!checkWord(input)) {
           isFormValid = false;
         }
       }
 
       if (rules.indexOf('password') !== -1) {
-        if (!checkPassword(item)) {
+        if (!checkPassword(input)) {
           isFormValid = false;
         }
       }
 
       if (rules.indexOf('confirm') !== -1) {
-        if (!checkConfirmFields(item, currentForm)) {
+        if (!checkConfirmFields(input, currentForm)) {
           isFormValid = false;
         }
       }

@@ -10,11 +10,11 @@ function CarFactory(brand, yearRelease, mileage, color, isIgnition, amountPetrol
 CarFactory.prototype = {
   constructor : CarFactory,
 
-  ignition : function() {
+  ignition: function() {
     this.isIgnition = true;
   },
 
-  start : function() {
+  start: function() {
     if (this.isIgnition) {
       console.log(this.color.slice(0,1).toUpperCase() + this.color.slice(1).toLowerCase()  + " car " + this.brand +" has run!");
     } else {
@@ -22,7 +22,7 @@ CarFactory.prototype = {
     }
   },
 
-  stop : function() {
+  stop: function() {
     if (this.isIgnition) {
       this.isIgnition = false;
       console.log("Car has stopped");
@@ -31,7 +31,7 @@ CarFactory.prototype = {
     }
   },
   
-  isPetrol : function() {
+  isPetrol: function() {
     if (this.amountPetrol > 0) { 
       this.ignition(); 
     } else {
@@ -39,7 +39,7 @@ CarFactory.prototype = {
     }
   },
 
-  toTankUp : function() {
+  toTankUp: function() {
     this.amountPetrol = 10;
     console.log("Car is tanked up");
   }

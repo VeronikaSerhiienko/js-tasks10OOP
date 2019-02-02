@@ -6,42 +6,40 @@
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-
-   <form class="js-logInForm js-form visible form-block" novalidate>
+  <form class="js-logInForm js-form visible form-block" novalidate>
     <fieldset>
-    <legend>Log in</legend>
-    <div>
-      <label for="form-name" >Name</label>
-      <input type="text" id="form-name" name="Name" class="js-name-field js-input form-block__field" required data-validation-rules="required minlength letter" minlength="2" placeholder="Andrew">
+      <legend>Log in</legend>
+      <div>
+        <label for="form-name" >Name</label>
+        <input type="text" id="form-name" name="Name" class="js-name-field js-input form-block__field" required data-validation-rules="required minlength letter" minlength="2" placeholder="Andrew">
       </div>
       <div>
         <label for="form-password">Password</label>
         <input type="password"  name="Password" class="js-password-field js-input form-block__field" required data-validation-rules="required minlength password" minlength="8" id="form-password">
       </div>
     </fieldset>
-    <input type="submit" value="Submit"></button>
+    <input type="submit" value="Submit">
   </form>
-
   <form class="js-singUpForm js-form visible form-block" novalidate>
     <fieldset>
     <legend>Sing Up</legend>
     <div>
-      <label for="form-name" >Name</label>
-      <input type="text" id="form-name" name="Name" class="js-name-field js-input form-block__field" required data-validation-rules="required minlength letter" minlength="2" placeholder="Andrew">
-      </div>
-      <div>
-        <label for="form-password">Password</label>
-        <input type="password"  name="Password" class="js-password-field js-input form-block__field" required id="form-password" required data-validation-rules="required minlength password" minlength="8">
-      </div>
-       <div>
-        <label for="form-confirn-password">Confirm password</label>
-        <input type="password"  name="Password" class="js-input form-block__field" id="form-confirn-password" data-validation-rules="required confirm" data-confirm-field-id="form-password" required>
-      </div>
-      <div >
-        <input type="checkbox" name="Bill" value="Admin" class="js-checkbox" checked>Admin
-      </div>
+      <label for="name-form" >Name</label>
+      <input type="text" id="name-form" name="Name" class="js-name-field js-input form-block__field" required data-validation-rules="required minlength letter" minlength="2" placeholder="Andrew">
+    </div>
+    <div>
+      <label for="password-form">Password</label>
+      <input type="password"  name="Password" class="js-password-field js-input form-block__field" id="password-form" required data-validation-rules="required minlength password" minlength="8">
+    </div>
+    <div>
+      <label for="form-confirn-password">Confirm password</label>
+      <input type="password"  name="Password" class="js-input form-block__field" id="form-confirn-password" data-validation-rules="required confirm" data-confirm-field-id="password-form" required>
+    </div>
+    <div >
+      <input type="checkbox" name="Bill" value="Admin" class="js-checkbox" checked>Admin
+    </div>
     </fieldset>
-    <input type="submit" value="Submit"></button>
+    <input type="submit" value="Submit">
   </form>
   <div class="js-user-name"></div>
   <button type="button" class="js-log-out button-item">Log out</button>
@@ -50,10 +48,9 @@
   <button type="button" class="js-delete-news button-item">Delete news</button>
   <button type="button" class="js-edit-profile button-item">Edit profile</button>
   <button type="button" class="js-edit-password button-item">Edit profile</button>
-
   <script src="js/CarFactory.js" defer></script>
   <script src="js/consoleLog.js" defer></script>
   <script src="js/validateForm.js"defer></script>
- <script src="js/account.js" defer></script>
+  <script src="js/account.js" defer></script>
 </body>
 </html>
