@@ -2,17 +2,15 @@ var logedUser = {
 
 };
 
-function User() {}
+function User(name, password) {
+  this.name = name;
+  this.password = password;
+  this.id = getId();
+}
 
-var User = {
+User.prototype = {
   viewNews: function() {
     document.querySelector('.js-view-news').classList.add('visible');
-  },
-  editNews: function() {
-    document.querySelector('.js-edit-news').classList.add('visible');
-  },
-  deleteNews: function() {
-    document.querySelector('.js-delete-news').classList.add('visible');
   },
   logOut: function() {
     document.querySelector('.js-log-out').classList.add('visible');
@@ -66,7 +64,7 @@ document.querySelector('.js-log-out').addEventListener('click', showStartPage);
 
 function createId() {
   var id = registredUsers.length;
-  return function(){ 
+  return function() { 
     return ++id;
   };
 }
@@ -74,22 +72,24 @@ function createId() {
 var getId = createId();
 
 function GuestFactory(name, password) {
-  this.name = name;
-  this.password = password;
   this.role = 'guest';
-  this.id = getId();
 }
 
-GuestFactory.prototype = User;
+GuestFactory.prototype =  Object.create(User.prototype);
 
 function AdminFactory(name, password) {
-  this.name = name;
-  this.password = password;
   this.role = 'admin';
-  this.id = getId();
 }
 
-AdminFactory.prototype = User;
+AdminFactory.prototype =  Object.create(User.prototype);
+
+AdminFactory.prototype.editNews = function() {
+  document.querySelector('.js-edit-news').classList.add('visible');
+};
+
+AdminFactory.prototype.deleteNews = function() {
+  document.querySelector('.js-delete-news').classList.add('visible');
+};
 
 function isSuchUserAlreadyExist(form) {
   var isNotExist = true;
@@ -186,15 +186,15 @@ function showOpportunities() {
   document.querySelector('.js-user-name').innerHTML = logedUser.name;
 
   if (logedUser.role === 'guest') {
-    User.logOut();
-    User.viewNews();
-    User.editProfile();
+    logedUser.logOut();
+    logedUser.viewNews();
+    logedUser.editProfile();
   } else {
-    User.logOut();
-    User.viewNews();
-    User.editProfile();
-    User.editNews();
-    User.deleteNews();
+    logedUser.logOut();
+    logedUser.viewNews();
+    logedUser.editProfile();
+    logedUser.editNews();
+    logedUser.deleteNews();
   }
 }
 
