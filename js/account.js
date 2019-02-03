@@ -2,15 +2,15 @@ var logedUser = {
 
 };
 
-function User(name, password) {
-  this.name = name;
-  this.password = password;
-  this.id = getId();
-}
-
-User.prototype = {
+var User = {
   viewNews: function() {
     document.querySelector('.js-view-news').classList.add('visible');
+  },
+  editNews: function() {
+    document.querySelector('.js-edit-news').classList.add('visible');
+  },
+  deleteNews: function() {
+    document.querySelector('.js-delete-news').classList.add('visible');
   },
   logOut: function() {
     document.querySelector('.js-log-out').classList.add('visible');
@@ -72,16 +72,22 @@ function createId() {
 var getId = createId();
 
 function GuestFactory(name, password) {
+  this.name = name;
+  this.password = password;
+  this.id = getId();
   this.role = 'guest';
 }
 
-GuestFactory.prototype =  Object.create(User.prototype);
+GuestFactory.prototype =  User;
 
 function AdminFactory(name, password) {
+  this.name = name;
+  this.password = password;
+  this.id = getId();
   this.role = 'admin';
 }
 
-AdminFactory.prototype =  Object.create(User.prototype);
+AdminFactory.prototype =  User;
 
 AdminFactory.prototype.editNews = function() {
   document.querySelector('.js-edit-news').classList.add('visible');
@@ -183,18 +189,19 @@ function hideForm() {
 }
 
 function showOpportunities() {
+  console.log(logedUser);
   document.querySelector('.js-user-name').innerHTML = logedUser.name;
 
   if (logedUser.role === 'guest') {
-    logedUser.logOut();
-    logedUser.viewNews();
-    logedUser.editProfile();
+    User.logOut();
+    User.viewNews();
+    User.editProfile();
   } else {
-    logedUser.logOut();
-    logedUser.viewNews();
-    logedUser.editProfile();
-    logedUser.editNews();
-    logedUser.deleteNews();
+    User.logOut();
+    User.viewNews();
+    User.editProfile();
+    User.editNews();
+    User.deleteNews();
   }
 }
 
